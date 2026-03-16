@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MPG Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+      color: #34495e;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #bdc3c7;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #27ae60;
+      min-height: 30px;
+    }
+    .error {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- You can replace this src with any car/gas logo URL -->
+    <img src="https://via.placeholder.com/120x120/3498db/ffffff?text=MPG" alt="MPG Calculator Logo" class="logo">
+    <h1>MPG Calculator</h1>
+    <p>Calculate your car's miles per gallon</p>
+
+    <label for="miles">Miles Traveled:</label>
+    <input type="number" id="miles" placeholder="e.g. 300" min="0" step="any">
+
+    <label for="gallons">Gallons of Gas Used:</label>
+    <input type="number" id="gallons" placeholder="e.g. 12.5" min="0" step="any">
+
+    <button onclick="calculateMPG()">Calculate MPG</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateMPG() {
+      const milesInput = document.getElementById("miles");
+      const gallonsInput = document.getElementById("gallons");
+      const resultDiv = document.getElementById("result");
+
+      const miles = parseFloat(milesInput.value);
+      const gallons = parseFloat(gallonsInput.value);
+
+      resultDiv.className = ""; // reset styling
+      resultDiv.innerHTML = "";
+
+      if (isNaN(miles) || isNaN(gallons)) {
+        resultDiv.className = "error";
+        resultDiv.innerHTML = "Please enter valid numbers for both fields.";
+        return;
+      }
+
+      if (miles < 0 || gallons < 0) {
+        resultDiv.className = "error";
+        resultDiv.innerHTML = "Values cannot be negative.";
+        return;
+      }
+
+      if (gallons === 0) {
+        resultDiv.className = "error";
+        resultDiv.innerHTML = "Gallons used cannot be zero (division by zero).";
+        return;
+      }
+
+      const mpg = miles / gallons;
+      resultDiv.innerHTML = `Your MPG: ${mpg.toFixed(2)}`;
+    }
+  </script>
+
+</body>
+</html>
