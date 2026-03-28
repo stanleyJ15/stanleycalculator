@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MPG Calculator</title>
+</head>
+
+<body>
+
+<h2>Miles Per Gallon Calculator</h2>
+
+<p>Miles Traveled:</p>
+<input type="text" id="miles">
+
+<p>Gallons Used:</p>
+<input type="text" id="gallons">
+
+<button onclick="calculate()">=</button>
+
+<p id="result">Your miles per gallon is:</p>
+
+<script>
+function calculate() {
+    var miles = parseFloat(document.getElementById("miles").value);
+    var gallons = parseFloat(document.getElementById("gallons").value);
+
+    if (gallons === 0 || isNaN(miles) || isNaN(gallons)) {
+        document.getElementById("result").innerHTML =
+            "Please enter valid numbers!";
+        return;
+    }
+
+    var mpg = miles / gallons;
+
+    document.getElementById("result").innerHTML =
+        "Your miles per gallon is: " + mpg.toFixed(2);
+}
+</script>
+
+</body>
+</html>
